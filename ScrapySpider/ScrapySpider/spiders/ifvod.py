@@ -78,7 +78,7 @@ end
     # 抓取列表页
     def start_requests(self):
 
-        for i in range(5, 10, 1):
+        for i in range(10, 13, 1):
         # for i in range(0, len(self.start_urls), 16):
             req_url = self.start_urls[i]
             yield SplashRequest(req_url, callback=self.parse, args={'wait': 5})
@@ -208,6 +208,7 @@ end
             cusor = self.conn.cursor(cursor=DictCursor)
             query_table_sql = """
                             SELECT * FROM vod_Play_480 where vod_name = %(vod_name)s and chapter_name = %(chapter_name)s
+                            and type_name = %(type_name)s
                         """
             item_dict = dict(item)
             # --------------查询数据--------------
