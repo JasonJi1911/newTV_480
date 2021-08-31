@@ -29,8 +29,8 @@ class IfMovieSpider(CrawlSpider):
     post_domain = 'http://src.shcdn-qq.com'
     post_url = post_domain+'/api/importDownload?format=json&key=38vKpMAk'
     start_urls = list()
-    for i in range(1, 14, 1):
-        start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,3&year=今年&language=-1&region=-1&status=-1&orderBy=0&desc=true&page=' + str(i))
+    # for i in range(1, 14, 1):
+    #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,3&year=今年&language=-1&region=-1&status=-1&orderBy=0&desc=true&page=' + str(i))
 
     # for i in range(1, 24, 1):
     #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,3&year=去年&language=-1&region=-1&status=-1&orderBy=0&desc=true&page=' + str(i))
@@ -39,8 +39,8 @@ class IfMovieSpider(CrawlSpider):
     #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,3&year=更早&language=-1&region=-1&status=-1&orderBy=0&desc=true&page=' + str(i))
 
     # 抓取新更新
-    # for i in range(1, 11, 1):
-    #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,3&year=今年&language=-1&region=-1&status=-1&orderBy=0&desc=true&page=' + str(i))
+    for i in range(1, 11, 1):
+        start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,3&year=今年&language=-1&region=-1&status=-1&orderBy=0&desc=true&page=' + str(i))
 
     lua = '''
 function main(splash, args)
@@ -166,7 +166,7 @@ end
             # else:
             #     proxy = ''
 
-            proxy = 'http://lum-customer-hl_14f54579-zone-data_center-route_err-pass_dyn-country-us:l4c1sj3mrg8a@zproxy.lum-superproxy.io:22225';
+            proxy = 'http://user-sp13690464:jp123456@gate.dc.smartproxy.com:20000'
 
             # url = "https://myip.top"
             print(url)

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7902c268-d9fd-4abd-b7fe-360e8ed37f04" name="Changes" comment="" />
+    <list default="true" id="7902c268-d9fd-4abd-b7fe-360e8ed37f04" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/ifmovie_480.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifmovie.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifmovie.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +87,30 @@
       <option name="presentableId" value="Default" />
       <updated>1629787130922</updated>
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1630372932629</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1630372932629</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
