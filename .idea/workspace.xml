@@ -2,14 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7902c268-d9fd-4abd-b7fe-360e8ed37f04" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/ifmovie_480.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/docuStart.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/ifanni_480.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/ifdocu_480.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/ifenter_480.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/newTV_480.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/newTV_480.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifmovie.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifmovie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/Proxy/browsermob/bin/bmp.log" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/Proxy/browsermob/bin/bmp.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifanni.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifanni.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifdocu.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifdocu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifenter.py" beforeDir="false" afterPath="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifenter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,9 +43,72 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.vodstart">
+  <component name="RunManager" selected="Python.enterstart">
+    <configuration name="docuStart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="newTV_480" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ScrapySpider/ScrapySpider" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ScrapySpider/ScrapySpider/docuStart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="enterstart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="newTV_480" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ScrapySpider/ScrapySpider" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ScrapySpider/ScrapySpider/enterstart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ifdocu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="newTV_480" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifdocu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="moviestart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="newTV_480" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,6 +153,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.enterstart" />
+        <item itemvalue="Python.docuStart" />
+        <item itemvalue="Python.ifdocu" />
         <item itemvalue="Python.vodstart" />
         <item itemvalue="Python.moviestart" />
       </list>
@@ -107,6 +190,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
@@ -134,6 +218,16 @@
           <url>file://$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifmovie.py</url>
           <line>185</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifdocu.py</url>
+          <line>209</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ScrapySpider/ScrapySpider/spiders/ifenter.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

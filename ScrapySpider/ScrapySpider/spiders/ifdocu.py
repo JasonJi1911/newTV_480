@@ -14,9 +14,9 @@ from scrapy import signals
 
 config = {
     'user': 'root',
-    'password': '874527a8bdd8ec2a',
+    'password': '696d9c48b1875ffe',
     'port': 3306,
-    'host': '47.88.17.122',
+    'host': '47.74.90.95',
     'db': 'beiwo2',
     'charset': 'utf8'
 }
@@ -29,36 +29,31 @@ class IfDocuSpider(CrawlSpider):
     post_domain = 'http://src.shcdn-qq.com'
     post_url = post_domain+'/api/importDownload?format=json&key=38vKpMAk'
     start_urls = list()
-    for i in range(1, 6, 1):
-        start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,7&year=今年&language=-1&region=-1&status=-1&orderBy=2&desc=true&page=' + str(i))
+    for i in range(1, 5, 1):
+        start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,7&year=今年&language=-1&region=-1&status=-1&orderBy=1&desc=true&page=' + str(i))
 
     # for i in range(1, 7, 1):
     #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,7&year=去年&language=-1&region=-1&status=-1&orderBy=2&desc=true&page=' + str(i))
 
     lua = '''
-        function main(splash, args)
-          splash.resource_timeout = 60
-          splash.images_enabled = false
-          splash.media_source_enabled = false
-          splash.html5_media_enabled = false
-          splash.private_mode_enabled = false
-          splash:on_request(function(request)
-              request:set_timeout(10.0)
-          end)
-          assert(splash:go(args.url))
-          assert(splash:wait(5))
-          splash.resource_timeout = 60
-          splash.images_enabled = false
-          splash.media_source_enabled = false
-          splash.html5_media_enabled = false
-          splash.private_mode_enabled = false
-          splash:on_request(function(request)
-              request:set_timeout(10.0)
-          end)
-          return {
-            har = splash:har(),
-          }
-        end
+function main(splash, args)
+  splash.resource_timeout = 60
+  splash.images_enabled = false
+  splash.media_source_enabled = false
+  splash.html5_media_enabled = false
+  splash.private_mode_enabled = false
+  splash:on_request(function(request)
+      request:set_timeout(10.0)
+    end)
+  assert(splash:go(args.url))
+  assert(splash:wait(5))
+  splash:on_request(function(request)
+      request:set_timeout(10.0)
+    end)
+  return {
+    har = splash:har(),
+  }
+end
     '''
     # proxy = "http://us_123456-zone-custom-region-us:jp123456@proxy.ipidea.io:2333"
 
@@ -79,7 +74,8 @@ class IfDocuSpider(CrawlSpider):
         for i in range(0, 1, 1):
         # for i in range(0, len(self.start_urls), 1):
             req_url = self.start_urls[i]
-            yield SplashRequest(req_url, callback=self.parse, args={'wait': 5})
+            proxy = 'http://user-sp13690464:jp123456@gate.dc.smartproxy.com:20000'
+            yield SplashRequest(req_url, callback=self.parse, args={'wait': 10, 'proxy': proxy})
 
     # 抓取详情页
     def parse(self, response):
@@ -87,8 +83,8 @@ class IfDocuSpider(CrawlSpider):
         soup = BeautifulSoup(response.text, 'html.parser')
         video_list = soup.select('.search-results .v-c')
 
-        for i in range(0, 1, 1):
-        # for i in range(0, len(video_list), 1):
+        # for i in range(0, 1, 1):
+        for i in range(0, len(video_list), 1):
             item = IfVodItem()
             video = video_list[i]
 
@@ -133,26 +129,38 @@ class IfDocuSpider(CrawlSpider):
                 if tag.string in area_list:
                     item['vod_area'] = tag.string
 
+            proxy = 'http://user-sp13690464:jp123456@gate.dc.smartproxy.com:20000'
             print(url)
             if not(url is None):
+                item['proxy'] = proxy
                 yield SplashRequest(url, callback=self.parse_item, endpoint='execute', meta={'item': item}
-                                    , args={'lua_source': self.lua, 'timeout': 3600, 'wait': 3})
+                                    , args={'lua_source': self.lua, 'timeout': 3600, 'wait': 10, 'proxy': proxy})
 
     # 抓取分集详情页
     def parse_item(self, response):
         # print(response.text)
         parent_item = response.meta["item"]
-        urls = re.findall(r'http[s]?://[^\sw]+/video/languagesplaylist?[^\s]+&pub=[0-9]{13}', response.text)
-        if len(urls) == 0:
+        proxy = parent_item["proxy"]
+        j = json.loads(response.text)
+        har = j['har']
+        list_url = ''
+        detail_url = ''
+        for entry in har['log']['entries']:
+            if entry['response']['status'] == 200 and '/video/languagesplaylist' in entry['request']['url']:
+                list_url = entry['request']['url']
+            if entry['response']['status'] == 200 and '/video/detail' in entry['request']['url']:
+                detail_url = entry['request']['url']
+
+        if list_url == '' or detail_url == '':
             return
 
-        r = requests.get(urls[0], timeout=10)
+        r = requests.get(list_url, timeout=10)
         j = json.loads(r.text)
         if not (j['data']['info'][0]['playList'] is None):
             play_list = j['data']['info'][0]['playList']
 
-        detail_urls = re.findall(r'http[s]?://[^\sw]+/video/detail?[^\s]+&pub=[0-9]{13}', response.text)
-        detail_r = requests.get(detail_urls[0], timeout=20)
+        # detail_urls = re.findall(r'http[s]?://[^\sw]+/video/detail?[^\s]+&pub=[0-9]{13}', response.text)
+        detail_r = requests.get(detail_url, timeout=20)
         detail_j = json.loads(detail_r.text)
         parent_item['vod_director'] = ''
         if not(detail_j['data']['info'][0]['directors'] is None) and len(detail_j['data']['info'][0]['directors']) > 0:
@@ -161,22 +169,8 @@ class IfDocuSpider(CrawlSpider):
         if not (detail_j['data']['info'][0]['contxt'] is None) and detail_j['data']['info'][0]['contxt'] != '':
             parent_item['vod_content'] = detail_j['data']['info'][0]['contxt']
 
-        # proxy_url = 'http://tiqu.linksocket.com:81/abroad?type=2&lb=1&sb=0&flow=1&regions=us&port=1&n=0&num=1'
-        # r = requests.get(proxy_url, timeout=20)
-        # proxy_list = json.loads(r.text)
-        # if len(proxy_list['data']) > 0 and not (proxy_list['data'][0] is None):
-        #     proxy_host = proxy_list['data'][0]['ip']
-        #     proxy_port = proxy_list['data'][0]['port']
-        #     proxy = 'http://%(host)s:%(port)s' % {
-        #         'host': proxy_host,
-        #         'port': proxy_port,
-        #     }
-        #     print(proxy)
-        # else:
-        proxy = ''
-
-        for i in range(0, 1, 1):
-        # for i in range(0, len(play_list), 1):
+        # for i in range(0, 1, 1):
+        for i in range(0, len(play_list), 1):
             play = play_list[i]
             if play['name'].find("花絮") != -1:
                 continue
@@ -189,11 +183,9 @@ class IfDocuSpider(CrawlSpider):
             # conn = pymysql.Connect(**config)
             cusor = self.conn.cursor(cursor=DictCursor)
             query_table_sql = """
-                            SELECT * FROM vod_Play_720 where vod_name = %(vod_name)s and chapter_name = %(chapter_name)s
+                            SELECT * FROM vod_Play_480 where vod_name = %(vod_name)s and chapter_name = %(chapter_name)s
+                            and type_name = %(type_name)s
                         """
-            # query_table_sql = """
-            #                 SELECT * FROM vod_Play_1080 where vod_name = %(vod_name)s and chapter_name = %(chapter_name)s
-            #             """
             item_dict = dict(item)
             # --------------查询数据--------------
             cusor.execute(query_table_sql, item_dict)
@@ -210,31 +202,23 @@ class IfDocuSpider(CrawlSpider):
             else:
                 print(proxy)
                 yield SplashRequest(self.base_play_url + play['key'], callback=self.parse_detail,
-                                    args={'lua_source': self.lua, 'timeout': 3600, 'wait': 3, 'proxy': proxy},
+                                    args={'lua_source': self.lua, 'timeout': 3600, 'wait': 10, 'proxy': proxy},
                                     endpoint='execute', meta={'item': item})
 
     # 抓取详情页，m3u8
     def parse_detail(self, response):
-        item = response.meta["item"]
-        urls = re.findall(r'http[s]?://[^\sw]+/video/play?[^\s]+&pub=[0-9]{13}', response.text)
-        if len(urls) == 0:
-            return
+        parent_item = response.meta["item"]
+        j = json.loads(response.text)
+        har = j['har']
+        print('running detail')
+        parent_item['vod_url'] = ""
+        parent_item['path'] = response.url
+        for entry in har['log']['entries']:
+            if entry['response']['status'] == 200 and 'chunklist.m3u8' in entry['request']['url']:
+                parent_item['vod_url'] = entry['request']['url']
+                # parent_item['chapter_name'] = '720P'
 
-        req_url = urls[0] + "&uid=128790057&sign=25e60824a0a3aa1accd0a7e1836a972b0427925698ebf097bed35d7cd80d3040_4f73deb6542f1fcaa1ae2b096c1bea0d&token=14dcd831ce6e43dab60d1324b49e8ff6&gid=1"
-        r = requests.get(req_url, timeout=10)
-        j = json.loads(r.text)
-        clarity_list = j['data']['info'][0]['clarity']
-        for clarity in clarity_list:
-            if not(clarity['path'] is None) and not(clarity['path']['result'] is None):
-                if clarity['title'] == '720':
-                    item['path'] = response.url
-                    item['vod_url'] = clarity['path']['result']
-                    # item['chapter_name'] = '720P'
-
-                # elif clarity['title'] == '1080':
-                #     item['path'] = response.url
-                #     item['vod_url'] = clarity['path']['result']
-                # item['chapter_name'] = '1080P'
-                else:
-                    continue
-        yield item
+        if parent_item['vod_url'] == '':
+            print(parent_item)
+        else:
+            yield parent_item

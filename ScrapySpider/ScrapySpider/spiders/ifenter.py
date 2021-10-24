@@ -14,9 +14,9 @@ from scrapy import signals
 
 config = {
     'user': 'root',
-    'password': '874527a8bdd8ec2a',
+    'password': '696d9c48b1875ffe',
     'port': 3306,
-    'host': '47.88.17.122',
+    'host': '47.74.90.95',
     'db': 'beiwo2',
     'charset': 'utf8'
 }
@@ -29,8 +29,8 @@ class IfEnterSpider(CrawlSpider):
     post_domain = 'http://src.shcdn-qq.com'
     post_url = post_domain+'/api/importDownload?format=json&key=38vKpMAk'
     start_urls = list()
-    for i in range(1, 8, 1):
-        start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,5&year=今年&language=-1&region=-1&status=-1&orderBy=2&desc=true&page=' + str(i))
+    # for i in range(1, 8, 1):
+    #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,5&year=今年&language=-1&region=-1&status=-1&orderBy=2&desc=true&page=' + str(i))
 
     # for i in range(1, 11, 1):
     #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,5&year=去年&language=-1&region=-1&status=-1&orderBy=2&desc=true&page=' + str(i))
@@ -39,8 +39,8 @@ class IfEnterSpider(CrawlSpider):
     #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,5&year=更早&language=-1&region=-1&status=-1&orderBy=2&desc=true&page=' + str(i))
 
     # # 更新连载
-    # for i in range(1, 5, 1):
-    #     start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,5&year=今年&language=-1&region=-1&status=-1&orderBy=1&desc=true&page=' + str(i))
+    for i in range(1, 5, 1):
+        start_urls.append('https://www.ifsp.tv/list?keyword=&star=&pageSize=36&cid=0,1,5&year=今年&language=-1&region=-1&status=-1&orderBy=1&desc=true&page=' + str(i))
 
     lua = '''
 function main(splash, args)
@@ -78,10 +78,11 @@ end
     # 抓取列表页
     def start_requests(self):
 
-        for i in range(0, 3, 1):
+        for i in range(0, 1, 1):
         # for i in range(0, len(self.start_urls), 1):
             req_url = self.start_urls[i]
-            yield SplashRequest(req_url, callback=self.parse, args={'wait': 5})
+            proxy = 'http://user-sp13690464:jp123456@gate.dc.smartproxy.com:20000'
+            yield SplashRequest(req_url, callback=self.parse, args={'wait': 5, 'proxy': proxy})
 
     # 抓取详情页
     def parse(self, response):
@@ -140,7 +141,7 @@ end
             if not(url is None):
                 item['proxy'] = proxy
                 yield SplashRequest(url, callback=self.parse_item, endpoint='execute', meta={'item': item}
-                                    , args={'lua_source': self.lua, 'timeout': 3600, 'wait': 3})
+                                    , args={'lua_source': self.lua, 'timeout': 3600, 'wait': 3, 'proxy': proxy})
 
     # 抓取分集详情页
     def parse_item(self, response):
@@ -160,13 +161,14 @@ end
         if list_url == '' or detail_url == '':
             return
 
-        r = requests.get(list_url, timeout=10)
+        proxies = {'http': proxy, 'https': proxy}
+        r = requests.get(list_url, timeout=10, proxies=proxies)
         j = json.loads(r.text)
         if not (j['data']['info'][0]['playList'] is None):
             play_list = j['data']['info'][0]['playList']
 
         # detail_urls = re.findall(r'http[s]?://[^\sw]+/video/detail?[^\s]+&pub=[0-9]{13}', response.text)
-        detail_r = requests.get(detail_url, timeout=20)
+        detail_r = requests.get(detail_url, timeout=20, proxies=proxies)
         detail_j = json.loads(detail_r.text)
         parent_item['vod_director'] = ''
         if not(detail_j['data']['info'][0]['directors'] is None) and len(detail_j['data']['info'][0]['directors']) > 0:

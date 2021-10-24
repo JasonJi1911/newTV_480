@@ -19,7 +19,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-SPLASH_URL = 'http://47.74.90.95:8050'
+SPLASH_URL = 'http://47.74.95.241:8050'
 COOKIES_ENABLES = False
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 100
